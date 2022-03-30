@@ -110,7 +110,7 @@ router.post("/token", async (req, res) => {
 		const dbToken = await tokenService.findToken(refreshToken)
 		if (isTokenInvalid(data, dbToken)) {
 			return res.code(401).json({
-				message: "Unautorized",
+				message: "Unauthorized",
 				code: 401,
 				errors: errors.array()
 			})
