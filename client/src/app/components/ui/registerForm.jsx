@@ -4,7 +4,7 @@ import TextField from '../common/form/textField'
 import SelectField from '../common/form/selectField'
 import RadioField from '../common/form/radioField'
 import MultiSelectField from '../common/form/multiSelectField'
-import CheckBoxField from '../common/form/checkBoxField'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { getQualities } from '../../store/qualities'
 import { getProfessions } from '../../store/professions'
@@ -21,7 +21,7 @@ const RegisterForm = () => {
     qualities: [],
     licence: false,
   })
-  const qualities = useSelector(getQualities())
+  /*const qualities = useSelector(getQualities())
   const qualitiesList = qualities.map((q) => ({
     label: q.name,
     value: q._id,
@@ -30,7 +30,7 @@ const RegisterForm = () => {
   const professionsList = professions.map((p) => ({
     label: p.name,
     value: p._id,
-  }))
+  }))*/
   const [errors, setErrors] = useState({})
 
   const handleChange = (target) => {
@@ -70,17 +70,6 @@ const RegisterForm = () => {
       min: {
         message: 'Пароль должен состоять минимум из 8 символов',
         value: 8,
-      },
-    },
-    profession: {
-      isRequired: {
-        message: 'Обязательно выберите вашу профессию',
-      },
-    },
-    licence: {
-      isRequired: {
-        message:
-          'Вы не можете использовать наш сервис без подтверждения лицензионного соглашения',
       },
     },
   }
@@ -129,41 +118,7 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      <SelectField
-        label="Выбери свою профессию"
-        defaultOption="Choose..."
-        options={professionsList}
-        name="profession"
-        onChange={handleChange}
-        value={data.profession}
-        error={errors.profession}
-      />
-      <RadioField
-        options={[
-          { name: 'Male', value: 'male' },
-          { name: 'Female', value: 'female' },
-          { name: 'Other', value: 'other' },
-        ]}
-        value={data.sex}
-        name="sex"
-        onChange={handleChange}
-        label="Выберите ваш пол"
-      />
-      <MultiSelectField
-        options={qualitiesList}
-        onChange={handleChange}
-        defaultValue={data.qualities}
-        name="qualities"
-        label="Выберите ваши качества"
-      />
-      <CheckBoxField
-        value={data.licence}
-        onChange={handleChange}
-        name="licence"
-        error={errors.licence}
-      >
-        Подтвердить <a>лицензионное соглашение</a>
-      </CheckBoxField>
+
       <button
         className="btn btn-primary w-100 mx-auto"
         type="submit"
