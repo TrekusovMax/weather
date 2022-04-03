@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const config = require('config')
 const chalk = require('chalk')
-const initDataBase = require('./startUp/initDataBase')
 const routes = require('./routes')
 
 const app = express()
@@ -13,18 +12,9 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/api', routes)
 
-/* if (process.env.NODE_ENV === "production") {
-	console.log("Production")
-} else {
-	console.log("Development")
-} */
-
 async function start() {
   try {
-    mongoose.connection.once('open', () => {
-      initDataBase()
-    })
-
+    
     await mongoose.connect(config.get('mongoUri'))
     console.log(chalk.green(`MongoDB connected`))
     app.listen(PORT, () => {

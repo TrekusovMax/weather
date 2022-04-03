@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { validator } from "../../../utils/ validator";
+import { validator } from "../../../utils/validator";
 import TextField from "../../common/form/textField";
 import SelectField from "../../common/form/selectField";
-import RadioField from "../../common/form/radio.Field";
+import RadioField from "../../common/form/radioField";
 import MultiSelectField from "../../common/form/multiSelectField";
 import BackHistoryButton from "../../common/backButton";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     getQualities,
     getQualitiesLoadingStatus
@@ -33,7 +33,6 @@ const EditUserPage = () => {
         label: p.name,
         value: p._id
     }));
-
     const [errors, setErrors] = useState({});
 
     const handleSubmit = (e) => {
@@ -64,7 +63,6 @@ const EditUserPage = () => {
             label: qual.name,
             value: qual._id
         }));
-
         return result;
     };
     useEffect(() => {
@@ -81,7 +79,7 @@ const EditUserPage = () => {
         }
     }, [data]);
 
-    const validatorConfog = {
+    const validatorConfig = {
         email: {
             isRequired: {
                 message: "Электронная почта обязательна для заполнения"
@@ -90,7 +88,6 @@ const EditUserPage = () => {
                 message: "Email введен некорректно"
             }
         },
-
         name: {
             isRequired: {
                 message: "Введите ваше имя"
@@ -105,7 +102,7 @@ const EditUserPage = () => {
         }));
     };
     const validate = () => {
-        const errors = validator(data, validatorConfog);
+        const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
@@ -134,8 +131,8 @@ const EditUserPage = () => {
                             <SelectField
                                 label="Выбери свою профессию"
                                 defaultOption="Choose..."
-                                name="profession"
                                 options={professionsList}
+                                name="profession"
                                 onChange={handleChange}
                                 value={data.profession}
                                 error={errors.profession}
@@ -156,7 +153,7 @@ const EditUserPage = () => {
                                 options={qualitiesList}
                                 onChange={handleChange}
                                 name="qualities"
-                                label="Выберите ваши качесвта"
+                                label="Выберите ваши качества"
                             />
                             <button
                                 type="submit"

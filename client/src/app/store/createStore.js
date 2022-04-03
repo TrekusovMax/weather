@@ -1,9 +1,8 @@
-import commentsReducer from "./comments";
-import professionsReducer from "./professions";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import qualitiesReducer from "./qualities";
+import professionsReducer from "./professions";
 import usersReducer from "./users";
-
-const { combineReducers, configureStore } = require("@reduxjs/toolkit");
+import commentsReducer from "./comments";
 
 const rootReducer = combineReducers({
     qualities: qualitiesReducer,

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import qualityService from "../services/qaulity.service";
+import qualityService from "../services/quality.service";
 import isOutdated from "../utils/isOutdated";
 
 const qualitiesSlice = createSlice({
@@ -14,12 +14,12 @@ const qualitiesSlice = createSlice({
         qualitiesRequested: (state) => {
             state.isLoading = true;
         },
-        qualitiesReceved: (state, action) => {
+        qualitiesReceived: (state, action) => {
             state.entities = action.payload;
             state.lastFetch = Date.now();
             state.isLoading = false;
         },
-        qualitiesRequestFiled: (state, action) => {
+        qualitiesRequestFailed: (state, action) => {
             state.error = action.payload;
             state.isLoading = false;
         }
@@ -27,7 +27,8 @@ const qualitiesSlice = createSlice({
 });
 
 const { reducer: qualitiesReducer, actions } = qualitiesSlice;
-const { qualitiesRequested, qualitiesReceved, qualitiesRequestFiled } = actions;
+const { qualitiesRequested, qualitiesReceived, qualitiesRequestFailed } =
+    actions;
 
 export const loadQualitiesList = () => async (dispatch, getState) => {
     const { lastFetch } = getState().qualities;
@@ -35,9 +36,9 @@ export const loadQualitiesList = () => async (dispatch, getState) => {
         dispatch(qualitiesRequested());
         try {
             const { content } = await qualityService.fetchAll();
-            dispatch(qualitiesReceved(content));
+            dispatch(qualitiesReceived(content));
         } catch (error) {
-            dispatch(qualitiesRequestFiled(error.message));
+            dispatch(qualitiesRequestFailed(error.message));
         }
     }
 };
@@ -45,7 +46,7 @@ export const loadQualitiesList = () => async (dispatch, getState) => {
 export const getQualities = () => (state) => state.qualities.entities;
 export const getQualitiesLoadingStatus = () => (state) =>
     state.qualities.isLoading;
-export const getQulitiesByIds = (qualitiesIds) => (state) => {
+export const getQualitiesByIds = (qualitiesIds) => (state) => {
     if (state.qualities.entities) {
         const qualitiesArray = [];
         for (const qualId of qualitiesIds) {

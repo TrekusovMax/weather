@@ -1,10 +1,10 @@
 const express = require('express')
-const Quality = require('../models/Quality')
+const Favorites = require('../models/Favorites')
 const router = express.Router({ mergeParams: true })
 
 router.get('/', async (req, res) => {
   try {
-    const list = await Quality.find()
+    const list = await Favorites.find()
     res.status(200).send(list)
   } catch (error) {
     res.status(500).json({

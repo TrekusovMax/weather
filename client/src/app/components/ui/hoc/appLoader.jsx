@@ -20,7 +20,7 @@ const AppLoader = ({ children }) => {
             dispatch(loadUsersList());
         }
     }, [isLoggedIn]);
-    if (usersStatusLoading) return "loading";
+    if (usersStatusLoading) return "Loading...";
     return children;
 };
 
@@ -30,4 +30,5 @@ AppLoader.propTypes = {
         PropTypes.node
     ])
 };
+
 export default AppLoader;

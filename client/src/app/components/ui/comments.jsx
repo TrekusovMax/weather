@@ -1,6 +1,7 @@
 import { orderBy } from "lodash";
 import React, { useEffect } from "react";
 import CommentsList, { AddCommentForm } from "../common/comments";
+import { useDispatch, useSelector } from "react-redux";
 import {
     createComment,
     getComments,
@@ -8,7 +9,6 @@ import {
     loadCommentsList,
     removeComment
 } from "../../store/comments";
-import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const Comments = () => {
@@ -18,10 +18,10 @@ const Comments = () => {
         dispatch(loadCommentsList(userId));
     }, [userId]);
     const isLoading = useSelector(getCommentsLoadingStatus());
-
     const comments = useSelector(getComments());
+
     const handleSubmit = (data) => {
-        dispatch(createComment({ data, pageId: userId }));
+        dispatch(createComment({ ...data, pageId: userId }));
     };
     const handleRemoveComment = (id) => {
         dispatch(removeComment(id));
@@ -45,7 +45,7 @@ const Comments = () => {
                                 onRemove={handleRemoveComment}
                             />
                         ) : (
-                            "loading..."
+                            "Loading..."
                         )}
                     </div>
                 </div>
