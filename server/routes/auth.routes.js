@@ -21,8 +21,8 @@ router.post("/signUp", [
 				return res.status(400).json({
 					error: {
 						message: "INVALID_DATA",
-						code: 400
-						// errors: errors.array()
+						code: 400,
+						errors: errors.array()
 					}
 				})
 			}
@@ -35,7 +35,8 @@ router.post("/signUp", [
 				return res.status(400).json({
 					error: {
 						message: "EMAIL_EXISTS",
-						code: 400
+						code: 400,
+						errors: errors.array()
 					}
 				})
 			}
