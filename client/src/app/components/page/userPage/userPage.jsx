@@ -12,11 +12,10 @@ const UserPage = ({ userId }) => {
 		return (
 			<div className="container">
 				<div className="row gutters-sm">
-					<div className="col-md-4 mb-3">
+					<div className="col-6 offset-3 my-3">
 						<UserCard user={user} />
 						{/* <QualitiesCard data={user.qualities} /> */}
 					</div>
-					<div className="col-md-8"></div>
 				</div>
 			</div>
 		)

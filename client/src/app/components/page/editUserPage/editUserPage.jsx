@@ -11,12 +11,12 @@ const EditUserPage = () => {
 	const [data, setData] = useState()
 	const currentUser = useSelector(getCurrentUserData())
 	const dispatch = useDispatch()
-	const qualities = useSelector(getQualities())
+	/* const qualities = useSelector(getQualities())
 	const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
 	const qualitiesList = qualities.map((q) => ({
 		label: q.name,
 		value: q._id
-	}))
+	})) */
 
 	const [errors, setErrors] = useState({})
 
@@ -26,12 +26,12 @@ const EditUserPage = () => {
 		if (!isValid) return
 		dispatch(
 			updateUser({
-				...data,
-				qualities: data.qualities.map((q) => q.value)
+				...data
+				//qualities: data.qualities.map((q) => q.value)
 			})
 		)
 	}
-	function getQualitiesListByIds(qualitiesIds) {
+	/*function getQualitiesListByIds(qualitiesIds) {
 		const qualitiesArray = []
 		for (const qualId of qualitiesIds) {
 			for (const quality of qualities) {
@@ -43,21 +43,21 @@ const EditUserPage = () => {
 		}
 		return qualitiesArray
 	}
-	const transformData = (data) => {
+	 const transformData = (data) => {
 		const result = getQualitiesListByIds(data).map((qual) => ({
 			label: qual.name,
 			value: qual._id
 		}))
 		return result
-	}
+	} */
 	useEffect(() => {
-		if (!qualitiesLoading && currentUser && !data) {
+		if (/* !qualitiesLoading && */ currentUser && !data) {
 			setData({
-				...currentUser,
-				qualities: transformData(currentUser.qualities)
+				...currentUser /* ,
+				qualities: transformData(currentUser.qualities) */
 			})
 		}
-	}, [qualitiesLoading, currentUser, data])
+	}, [/* qualitiesLoading, */ currentUser, data])
 	useEffect(() => {
 		if (data && isLoading) {
 			setIsLoading(false)
@@ -92,30 +92,33 @@ const EditUserPage = () => {
 		return Object.keys(errors).length === 0
 	}
 	const isValid = Object.keys(errors).length === 0
+
 	return (
 		<div className="container mt-5">
 			<BackHistoryButton />
 			<div className="row">
 				<div className="col-md-6 offset-md-3 shadow p-4">
-					<form onSubmit={handleSubmit}>
-						<TextField
-							label="Имя"
-							name="name"
-							value={data.name}
-							onChange={handleChange}
-							error={errors.name}
-						/>
-						<TextField
-							label="Электронная почта"
-							name="email"
-							value={data.email}
-							onChange={handleChange}
-							error={errors.email}
-						/>
-						<button type="submit" disabled={!isValid} className="btn btn-primary w-100 mx-auto">
-							Обновить
-						</button>
-					</form>
+					{data && (
+						<form onSubmit={handleSubmit}>
+							<TextField
+								label="Имя"
+								name="name"
+								value={data.name}
+								onChange={handleChange}
+								error={errors.name}
+							/>
+							<TextField
+								label="Электронная почта"
+								name="email"
+								value={data.email}
+								onChange={handleChange}
+								error={errors.email}
+							/>
+							<button type="submit" disabled={!isValid} className="btn btn-primary w-100 mx-auto">
+								Обновить
+							</button>
+						</form>
+					)}
 				</div>
 			</div>
 		</div>

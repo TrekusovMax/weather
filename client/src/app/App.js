@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
-import "react-toastify/dist/ReactToastify.css"
+//import "react-toastify/dist/ReactToastify.css"
 import Users from "./layouts/users"
 import Login from "./layouts/login"
 import Main from "./layouts/main"

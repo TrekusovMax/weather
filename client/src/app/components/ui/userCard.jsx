@@ -17,7 +17,8 @@ const UserCard = ({ user }) => {
 				<button
 					className="position-absolute top-0 end-0 btn btn-light btn-sm"
 					onClick={handleClick}>
-					<i className="bi bi-gear"></i>
+					{/* la la-gear */}
+					<i className="la la-gear" style={{ fontSize: "24px" }}></i>
 				</button>
 
 				<div className="d-flex  align-items-center text-center position-relative">
