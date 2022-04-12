@@ -3,7 +3,7 @@ import { validator } from "../../../utils/validator"
 import TextField from "../../common/form/textField"
 import BackHistoryButton from "../../common/backButton"
 import { useDispatch, useSelector } from "react-redux"
-import { getQualities, getQualitiesLoadingStatus } from "../../../store/qualities"
+//import { getQualities, getQualitiesLoadingStatus } from "../../../store/qualities"
 import { getCurrentUserData, updateUser } from "../../../store/users"
 
 const EditUserPage = () => {
@@ -80,6 +80,7 @@ const EditUserPage = () => {
 		}
 	}
 	useEffect(() => validate(), [data])
+
 	const handleChange = (target) => {
 		setData((prevState) => ({
 			...prevState,
