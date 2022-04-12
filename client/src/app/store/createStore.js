@@ -5,7 +5,6 @@ import usersReducer from "./users"
 
 const rootReducer = combineReducers({
 	qualities: qualitiesReducer,
-
 	users: usersReducer
 })
 

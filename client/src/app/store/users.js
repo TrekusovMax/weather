@@ -137,6 +137,7 @@ export const updateUser = (payload) => async (dispatch) => {
 
 export const getUsersList = () => (state) => state.users.entities
 export const getCurrentUserData = () => (state) => {
+	console.log(state.users)
 	return state.users.entities
 		? state.users.entities.find((u) => u._id === state.users.auth.userId)
 		: null

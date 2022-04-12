@@ -6,10 +6,13 @@ import { getIsLoggedIn } from "../../store/users"
 
 const NavBar = () => {
 	const isLoggedIn = useSelector(getIsLoggedIn())
+
 	return (
 		<nav className="navbar navbar-dark bg-primary rounded">
 			<div className="container-fluid">
-				<a className="navbar-brand">Прогноз погоды</a>
+				<Link className="navbar-brand" to="/">
+					Прогноз погоды
+				</Link>
 				<form className="d-flex w-50">
 					<input
 						className="form-control me-2"
@@ -18,36 +21,14 @@ const NavBar = () => {
 						aria-label="Выберите город"
 					/>
 				</form>
-				<div className="text-white dropdown">
-					<i className="las la-user" style={{ fontSize: "24px" }}></i>
-					<a
-						className="text-white dropdown-toggle"
-						type="button"
-						id="dropdownMenuButton"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false">
-						Личный кабинет
-					</a>
-					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a className="dropdown-item" href="#">
-							Профиль
-						</a>
-						<a className="dropdown-item" href="/favorites.html">
-							Избранное
-						</a>
-						<a className="dropdown-item" href="#">
-							Выйти
-						</a>
-					</div>
-				</div>
 
 				<div className="d-flex">
 					{isLoggedIn ? (
 						<NavProfile />
 					) : (
-						<Link className="nav-link " aria-current="page" to="/login">
-							Login
+						<Link className="nav-link text-white" aria-current="page" to="/login">
+							<i className="las la-user" style={{ fontSize: "24px" }}></i>
+							<u>Личный кабинет</u>
 						</Link>
 					)}
 				</div>
