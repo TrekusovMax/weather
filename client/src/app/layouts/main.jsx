@@ -1,13 +1,17 @@
 import React from "react"
-import { useSelector } from "react-redux"
-import { getWeather } from "../store/weather"
+import { useDispatch, useSelector } from "react-redux"
+import LeftBlock from "../components/ui/leftBlock"
+import { getWeather, loadWeatherList } from "../store/weather"
 
 const Main = () => {
-	const weather = useSelector(getWeather())
-	console.log(weather)
+	const dispatch = useDispatch()
+	const list = useSelector(getWeather())
+	console.log(list)
 	return (
-		<div className="container mt-5">
-			<h1> Main Page</h1>
+		<div className="overflow-hidden my-5">
+			<div className="row gx-3">
+				<LeftBlock />
+			</div>
 		</div>
 	)
 }

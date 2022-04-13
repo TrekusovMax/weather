@@ -10,21 +10,25 @@ import LogOut from "./layouts/logOut"
 import AppLoader from "./components/ui/hoc/appLoader"
 
 import NavBar from "./components/ui/navBar"
+import { ToastContainer } from "react-toastify"
 
 function App() {
 	return (
-		<AppLoader>
-			<div className="container mt-3">
-				<NavBar />
-				<Switch>
-					<ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
-					<Route path="/login/:type?" component={Login} />
-					<Route path="/logout" component={LogOut} />
-					<Route path="/" exact component={Main} />
-					<Redirect to="/" />
-				</Switch>
-			</div>
-		</AppLoader>
+		<div>
+			<AppLoader>
+				<div className="container mt-3">
+					<NavBar />
+					<Switch>
+						<ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
+						<Route path="/login/:type?" component={Login} />
+						<Route path="/logout" component={LogOut} />
+						<Route path="/" exact component={Main} />
+						<Redirect to="/" />
+					</Switch>
+				</div>
+			</AppLoader>
+			<ToastContainer />
+		</div>
 	)
 }
 

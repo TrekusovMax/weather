@@ -7,7 +7,8 @@ const weatherSlice = createSlice({
 	initialState: {
 		entities: null,
 		isLoading: true,
-		error: null
+		error: null,
+		lastFetch: null
 	},
 	reducers: {
 		weatherRequested: (state) => {
@@ -29,11 +30,11 @@ const { weatherRequested, weatherReceived, weatherRequestFailed } = actions
 
 export const loadWeatherList = () => async (dispatch, getState) => {
 	const { lastFetch } = getState().weather
-	console.log(lastFetch)
+	//	console.log(lastFetch)
 	if (isOutdated(lastFetch)) {
 		dispatch(weatherRequested())
 		try {
-			const { content } = await weatherService.getAll()
+			const content = await weatherService.getAll()
 			dispatch(weatherReceived(content))
 		} catch (error) {
 			dispatch(weatherRequestFailed(error.message))
