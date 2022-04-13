@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useDispatch, useSelector } from "react-redux"
 import { getIsLoggedIn, getUsersLoadingStatus, loadUsersList } from "../../../store/users"
 //import { loadQualitiesList } from "../../../store/qualities"
+import { loadWeatherList } from "./../../../store/weather"
 
 const AppLoader = ({ children }) => {
 	const dispatch = useDispatch()
@@ -10,11 +11,13 @@ const AppLoader = ({ children }) => {
 	const usersStatusLoading = useSelector(getUsersLoadingStatus())
 	useEffect(() => {
 		//dispatch(loadQualitiesList())
-
 		if (isLoggedIn) {
 			dispatch(loadUsersList())
 		}
 	}, [isLoggedIn])
+	useEffect(() => {
+		dispatch(loadWeatherList())
+	}, [])
 	if (usersStatusLoading) return "Loading..."
 	return children
 }

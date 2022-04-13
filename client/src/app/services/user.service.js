@@ -10,8 +10,6 @@ const userService = {
 	},
 	create: async (payload) => {
 		const { data } = await httpService.put(userEndpoint + payload._id, payload)
-		/* 		console.log(payload)
-		console.log(data) */
 		return data
 	},
 	update: async (payload) => {

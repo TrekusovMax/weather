@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import qualitiesReducer from "./qualities"
 
 import usersReducer from "./users"
+import weatherReducer from "./weather"
 
 const rootReducer = combineReducers({
-	qualities: qualitiesReducer,
+	weather: weatherReducer,
 	users: usersReducer
 })
 

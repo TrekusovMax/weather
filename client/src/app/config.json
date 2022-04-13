@@ -1,4 +1,6 @@
 {
 	"apiEndpoint": "http://localhost:8080/api",
-	"isFireBase": false
+	"isFireBase": false,
+	"api_key": "e7b8f7ef83c1461f83562940221201",
+	"api_url": "https://api.weatherapi.com/v1/forecast.json"
 }
