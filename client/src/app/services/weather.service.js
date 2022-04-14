@@ -11,7 +11,8 @@ const httpWeater = axios.create({
 		q: "Москва",
 		aqi: "no",
 		alerts: "no",
-		lang: "ru"
+		lang: "ru",
+		days: 3
 	}
 })
 
