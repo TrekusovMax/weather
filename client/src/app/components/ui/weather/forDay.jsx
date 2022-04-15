@@ -1,14 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useSelector } from "react-redux"
-import { getWeather } from "../../../store/weather"
 
-const ForDay = () => {
-	const weatherList = useSelector(getWeather())
-	const { forecast } = weatherList
-	const hours = forecast["forecastday"][0]["hour"]
+const ForDay = ({ day }) => {
 	const time = ["3", "9", "15", "21"]
-	console.log(hours)
+	const hours = day["hour"]
+
 	return (
 		<div className="col-8 border-start">
 			<div className="d-flex flex-row justify-content-around">
@@ -65,8 +61,8 @@ const ForDay = () => {
 		</div>
 	)
 }
-/* LeftBlock.propTypes = {
-    data: PropTypes.array
-}; */
+ForDay.propTypes = {
+	day: PropTypes.object
+}
 
 export default ForDay

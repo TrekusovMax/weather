@@ -1,10 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useSelector } from "react-redux"
-import { getWeather } from "../../../store/weather"
 import ForDay from "./forDay"
+import Forcast from "./forecast"
 
-const NavContent = ({ current }) => {
+const NavContent = ({ day, id, active, forecast }) => {
 	const windDirection = {
 		N: "С",
 		NNE: "СВ",
@@ -23,56 +22,67 @@ const NavContent = ({ current }) => {
 		NW: "СЗ",
 		NNW: "С"
 	}
+
 	return (
 		<div
-			className="tab-pane fade show active"
-			id="nav-home"
+			className={`tab-pane fade show ${active}`}
+			id={id}
 			role="tabpanel"
-			aria-labelledby="nav-home-tab">
+			aria-labelledby={`${id}-tab`}>
 			<div className="row mt-2">
-				<div className="col-4">
-					<div className="mt-2 d-flex flex-row justify-content-between">
-						<h4 className="bg-primary rounded p-2 text-dark bg-opacity-10 w-50 text-center">
-							{current.temp_c > 0 ? "+" : "-"}
-							{current.temp_c}&#8451;
-						</h4>
-						<img src={current.condition.icon} alt="Пасмурно" />
-						<p className="align-self-end text-secondary">{current.condition.text}</p>
-					</div>
-					<hr />
-					<div className="mt-2 d-flex flex-row justify-content-between">
-						<p>По ощущению</p>
-						<span>
-							{current.feelslike_c > 0 ? "+" : ""}
-							{Math.round(current.feelslike_c)}&#8451;
-						</span>
-					</div>
-					<div className="mt-2 d-flex flex-row justify-content-between">
-						<p>Ветер</p>
-						<span>
-							{Math.round(current.wind_kph / 3.6)} м/с, "{windDirection[current.wind_dir]}"
-						</span>
-					</div>
-					<div className="mt-2 d-flex flex-row justify-content-between">
-						<p>Давление</p>
-						<span>{Math.round(current.pressure_mb / 1.333)} мм.рт.ст.</span>
-					</div>
-					<div className="mt-2 d-flex flex-row justify-content-between">
-						<p>Влажность</p>
-						<span>{current.humidity}%</span>
-					</div>
-					<div className="mt-2 d-flex flex-row justify-content-between">
-						<p>Облачность</p>
-						<span>{current.cloud}%</span>
-					</div>
-				</div>
-				<ForDay />
+				{!forecast ? (
+					<>
+						<div className="col-4">
+							<div className="mt-2 d-flex flex-row justify-content-between">
+								<h4 className="bg-primary rounded p-2 text-dark bg-opacity-10 w-50 text-center">
+									{(day.day.maxtemp_c - day.day.mintemp_c) / 2 > 0 ? "+" : "-"}
+									{Math.round((day.day.maxtemp_c - day.day.mintemp_c) / 2)}&#8451;
+								</h4>
+								<img src={day.day.condition.icon} alt="Пасмурно" />
+								<p className="align-self-end text-secondary">{day.day.condition.text}</p>
+							</div>
+							<hr />
+							<div className="mt-2 d-flex flex-row justify-content-between">
+								<p>По ощущению</p>
+								<span>
+									{day.hour[12].feelslike_c > 0 ? "+" : ""}
+									{Math.round(day.hour[12].feelslike_c)}&#8451;
+								</span>
+							</div>
+							<div className="mt-2 d-flex flex-row justify-content-between">
+								<p>Ветер</p>
+								<span>
+									{Math.round(day.hour[12].wind_kph / 3.6)} м/с, "
+									{windDirection[day.hour[12].wind_dir]}"
+								</span>
+							</div>
+							<div className="mt-2 d-flex flex-row justify-content-between">
+								<p>Давление</p>
+								<span>{Math.round(day.hour[12].pressure_mb / 1.333)} мм.рт.ст.</span>
+							</div>
+							<div className="mt-2 d-flex flex-row justify-content-between">
+								<p>Влажность</p>
+								<span>{day.hour[12].humidity}%</span>
+							</div>
+							<div className="mt-2 d-flex flex-row justify-content-between">
+								<p>Облачность</p>
+								<span>{day.hour[12].cloud}%</span>
+							</div>
+						</div>
+						<ForDay day={day} />
+					</>
+				) : (
+					<Forcast />
+				)}
 			</div>
 		</div>
 	)
 }
 NavContent.propTypes = {
-	current: PropTypes.object
+	day: PropTypes.object,
+	forecast: PropTypes.array,
+	id: PropTypes.string,
+	active: PropTypes.string
 }
 
 export default NavContent

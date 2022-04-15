@@ -7,34 +7,34 @@ const NavButton = () => {
 			<div className="nav nav-tabs flex-row justify-content-evenly" id="nav-tab" role="tablist">
 				<button
 					className="nav-link active"
-					id="nav-home-tab"
+					id="nav-today-tab"
 					data-bs-toggle="tab"
-					data-bs-target="#nav-home"
+					data-bs-target="#today"
 					type="button"
 					role="tab"
-					aria-controls="nav-home"
+					aria-controls="today"
 					aria-selected="true">
 					Сегодня
 				</button>
 				<button
 					className="nav-link"
-					id="nav-profile-tab"
+					id="nav-tomorrow-tab"
 					data-bs-toggle="tab"
-					data-bs-target="#nav-profile"
+					data-bs-target="#tomorrow"
 					type="button"
 					role="tab"
-					aria-controls="nav-profile"
+					aria-controls="tomorrow"
 					aria-selected="false">
 					Завтра
 				</button>
 				<button
 					className="nav-link"
-					id="nav-contact-tab"
+					id="nav-forcast-tab"
 					data-bs-toggle="tab"
-					data-bs-target="#nav-contact"
+					data-bs-target="#forcast"
 					type="button"
 					role="tab"
-					aria-controls="nav-contact"
+					aria-controls="forcast"
 					aria-selected="false">
 					3 дня
 				</button>

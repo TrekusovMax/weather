@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import dateFormat, { masks } from "dateformat"
+import dateFormat from "dateformat"
 const City = ({ city, date }) => {
 	return (
 		<>

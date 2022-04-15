@@ -1,2 +1,2 @@
-import WeatherBlock from "./weatherBlock"
-export default WeatherBlock
+import WeatherLeftBlock from "./weatherLeftBlock"
+export default WeatherLeftBlock
