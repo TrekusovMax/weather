@@ -82,7 +82,7 @@ const UsersListPage = () => {
 			</div>
 		)
 	}
-	return "loading..."
+	return "Loading..."
 }
 UsersListPage.propTypes = {
 	users: PropTypes.array

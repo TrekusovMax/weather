@@ -4,11 +4,13 @@ import config from "../config.json"
 
 const endpoint = "forecast.json"
 
+const city = decodeURI(document.location.pathname).substring(1).split("/")[0]
+
 const httpWeater = axios.create({
 	baseURL: config.api_url,
 	params: {
 		key: config.api_key,
-		q: "Москва",
+		q: city === "" ? "Москва" : city,
 		aqi: "no",
 		alerts: "no",
 		lang: "ru",

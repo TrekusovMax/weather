@@ -4,6 +4,7 @@ import { getWeatherLoadingStatus, getWeather } from "../../../store/weather"
 import City from "./city"
 import NavButton from "./navButton"
 import NavContent from "./navContent"
+import { useParams } from "react-router-dom"
 
 const LeftBlock = () => {
 	const isLoading = useSelector(getWeatherLoadingStatus())

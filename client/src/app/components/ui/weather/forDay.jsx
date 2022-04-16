@@ -1,9 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link, useParams } from "react-router-dom"
 
 const ForDay = ({ day }) => {
 	const time = ["3", "9", "15", "21"]
 	const hours = day["hour"]
+	const { city } = useParams()
 
 	return (
 		<div className="col-8 border-start">
@@ -54,9 +56,9 @@ const ForDay = ({ day }) => {
 				))}
 			</div>
 			<div className="d-flex justify-content-end mt-3">
-				<a href="more.html" className="align-self-end">
+				<Link to={`/${city}/more`} className="align-self-end">
 					Посмотреть подробнее
-				</a>
+				</Link>
 			</div>
 		</div>
 	)

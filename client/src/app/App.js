@@ -11,21 +11,24 @@ import AppLoader from "./components/ui/hoc/appLoader"
 
 import NavBar from "./components/ui/navBar"
 import { ToastContainer } from "react-toastify"
+import { CityProvider } from "./hooks/useCity"
 
 function App() {
 	return (
 		<div>
 			<AppLoader>
-				<div className="container mt-3">
-					<NavBar />
-					<Switch>
-						<ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
-						<Route path="/login/:type?" component={Login} />
-						<Route path="/logout" component={LogOut} />
-						<Route path="/" exact component={Main} />
-						<Redirect to="/" />
-					</Switch>
-				</div>
+				<CityProvider>
+					<div className="container mt-3">
+						<NavBar />
+						<Switch>
+							<ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
+							<Route path="/login/:type?" component={Login} />
+							<Route path="/logout" component={LogOut} />
+							<Route path="/:city?/:more?" exact component={Main} />
+							<Redirect to="/" />
+						</Switch>
+					</div>
+				</CityProvider>
 			</AppLoader>
 			<ToastContainer />
 		</div>

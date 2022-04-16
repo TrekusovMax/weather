@@ -21,7 +21,6 @@ const RightBlock = () => {
 	const { forecast } = weatherList
 	const current = forecast.forecastday[0]
 
-	console.log(current)
 	return (
 		<div className="col-4 d-flex flex-column w-500">
 			<div className="sp-3 border bg-light p-3">
@@ -47,7 +46,12 @@ const RightBlock = () => {
 				</div>
 				<hr className="my-4" />
 				<div className="d-flex align-items-center flex-row justify-content-between p-2">
-					<img src="img/moon.png" width="64px" height="64px" alt="" />
+					<img
+						src={`${window.location.origin}/img/${current.astro.moon_phase}.png`}
+						width="64px"
+						height="64px"
+						alt=""
+					/>
 
 					<h5>{moon_phase[current.astro.moon_phase]}</h5>
 				</div>

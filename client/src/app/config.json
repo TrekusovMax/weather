@@ -2,5 +2,7 @@
 	"apiEndpoint": "http://localhost:8080/api",
 	"isFireBase": false,
 	"api_key": "e7b8f7ef83c1461f83562940221201",
-	"api_url": "https://api.weatherapi.com/v1/"
+	"api_url": "https://api.weatherapi.com/v1/",
+	"dadata_api_key": "b861cd7f6b317de847ac1573b342595f827734af",
+	"dadata_secret_key": "275594106f9ebee68ec26202a024399d6c71edfa"
 }

@@ -30,7 +30,6 @@ const { weatherRequested, weatherReceived, weatherRequestFailed } = actions
 
 export const loadWeatherList = () => async (dispatch, getState) => {
 	const { lastFetch } = getState().weather
-	//	console.log(lastFetch)
 	if (isOutdated(lastFetch)) {
 		dispatch(weatherRequested())
 		try {
@@ -44,5 +43,6 @@ export const loadWeatherList = () => async (dispatch, getState) => {
 
 export const getWeather = () => (state) => state.weather.entities
 export const getWeatherLoadingStatus = () => (state) => state.weather.isLoading
+export const getWeatherError = () => (state) => state.weather.error
 
 export default weatherReducer
