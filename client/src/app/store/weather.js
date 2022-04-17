@@ -40,7 +40,18 @@ export const loadWeatherList = () => async (dispatch, getState) => {
 		}
 	}
 }
-
+export const getByCityName = (cityName) => async (dispatch, getState) => {
+	const { lastFetch } = getState().weather
+	if (isOutdated(lastFetch)) {
+		dispatch(weatherRequested())
+		try {
+			const content = await weatherService.getCity(cityName)
+			dispatch(weatherReceived(content))
+		} catch (error) {
+			dispatch(weatherRequestFailed(error.message))
+		}
+	}
+}
 export const getWeather = () => (state) => state.weather.entities
 export const getWeatherLoadingStatus = () => (state) => state.weather.isLoading
 export const getWeatherError = () => (state) => state.weather.error

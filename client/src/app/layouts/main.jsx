@@ -4,11 +4,13 @@ import RightBlock from "./../components/ui/weather/rightBlock"
 
 import { useParams } from "react-router-dom"
 import { useCity } from "./../hooks/useCity"
+import { useSelector } from "react-redux"
+import { getWeatherError } from "./../store/weather"
 
 const Main = () => {
 	const { city, more } = useParams()
-	const { error } = useCity()
-	//console.log(city)
+	const error = useSelector(getWeatherError())
+
 	if (error) {
 		return <h1>Город не найден</h1>
 	}

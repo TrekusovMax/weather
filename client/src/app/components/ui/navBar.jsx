@@ -1,26 +1,36 @@
-import React, { useEffect, useState } from "react"
+import React, { useRef } from "react"
 import { Link } from "react-router-dom"
 import NavProfile from "./navProfile"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getIsLoggedIn } from "../../store/users"
-import { AddressSuggestions } from "react-dadata"
+
 import "react-dadata/dist/react-dadata.css"
 import config from "../../config.json"
 import history from "../../utils/history"
 
+import { AddressSuggestions } from "react-dadata"
+
+import { getByCityName } from "./../../store/weather"
+
 const NavBar = () => {
+	const dispatch = useDispatch()
 	const isLoggedIn = useSelector(getIsLoggedIn())
+
 	const handleClick = () => {
+		if (suggestionsRef.current) {
+			suggestionsRef.current.setInputValue("")
+		}
+		dispatch(getByCityName("Москва"))
+
 		history.push("/")
 	}
-	const [value, setValue] = useState()
 
-	useEffect(() => {
-		if (value) {
-			history.push(value?.data?.city)
-		}
-		console.log(history)
-	}, [value])
+	const handleChange = (cityName) => {
+		dispatch(getByCityName(cityName?.data?.city))
+		history.push(cityName?.data?.city)
+	}
+
+	const suggestionsRef = useRef()
 
 	return (
 		<nav className="navbar navbar-dark bg-primary rounded">
@@ -31,10 +41,12 @@ const NavBar = () => {
 				<div className="w-50">
 					<AddressSuggestions
 						token={`${config.dadata_api_key}`}
-						value={value}
-						onChange={setValue}
+						onChange={(cityName) => {
+							handleChange(cityName)
+						}}
 						inputProps={{ placeholder: "Выберите город" }}
 						minChars={3}
+						ref={suggestionsRef}
 					/>
 				</div>
 				<div className="d-flex">

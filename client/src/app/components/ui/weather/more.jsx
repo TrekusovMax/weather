@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import { Link, useParams } from "react-router-dom"
 import { useCity } from "./../../../hooks/useCity"
 
-const ForDay = ({ day }) => {
-	const time = ["3", "9", "15", "21"]
+const More = ({ city, day }) => {
+	const time = ["0", "3", "6", "9", "12", "15", "18", "21"]
 	const hours = day["hour"]
 	const { city } = useCity()
 
@@ -64,8 +64,8 @@ const ForDay = ({ day }) => {
 		</div>
 	)
 }
-ForDay.propTypes = {
+More.propTypes = {
 	day: PropTypes.object
 }
 
-export default ForDay
+export default More
