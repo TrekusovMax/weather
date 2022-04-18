@@ -1,19 +1,16 @@
-import React, { useEffect } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
 import { getWeatherLoadingStatus, getWeather } from "../../../store/weather"
 import City from "./city"
 import NavButton from "./navButton"
 import NavContent from "./navContent"
-import { useParams } from "react-router-dom"
-import { useCity } from "./../../../hooks/useCity"
 
-const LeftBlock = () => {
+const LeftBlock = ({ city, location, forecast }) => {
 	const isLoading = useSelector(getWeatherLoadingStatus())
-	const { city } = useCity()
-	const weatherList = useSelector(getWeather())
+
 	if (isLoading) return "Loading..."
 
-	const { location, forecast } = weatherList
 	const current = forecast.forecastday[0]
 	const tomorrow = forecast.forecastday[1]
 
@@ -33,5 +30,9 @@ const LeftBlock = () => {
 		</>
 	)
 }
-
+LeftBlock.propTypes = {
+	city: PropTypes.string,
+	location: PropTypes.object,
+	forecast: PropTypes.object
+}
 export default LeftBlock

@@ -24,7 +24,7 @@ function App() {
 							<ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
 							<Route path="/login/:type?" component={Login} />
 							<Route path="/logout" component={LogOut} />
-							<Route path="/:city?/:more?" exact component={Main} />
+							<Route path="/:city?/:more?/:day?" exact component={Main} />
 							<Redirect to="/" />
 						</Switch>
 					</div>

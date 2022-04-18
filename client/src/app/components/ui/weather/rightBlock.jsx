@@ -1,9 +1,10 @@
-import React, { useEffect } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
-import { getWeatherLoadingStatus, getWeather } from "../../../store/weather"
+import { getWeatherLoadingStatus } from "../../../store/weather"
 import { convertTime12To24 } from "../../../utils/convertTime12To24"
 
-const RightBlock = () => {
+const RightBlock = ({ forecast }) => {
 	const isLoading = useSelector(getWeatherLoadingStatus())
 	const moon_phase = {
 		"New Moon": "Новолуние",
@@ -15,11 +16,13 @@ const RightBlock = () => {
 		"Last Quarter": "Последняя четверть",
 		"Waning Crescent": "Убывающий месяц"
 	}
-	const weatherList = useSelector(getWeather())
-	if (isLoading) return "Loading..."
 
-	const { forecast } = weatherList
+	if (isLoading) return "Loading..."
 	const current = forecast.forecastday[0]
+	const isHaveTimeMoonset =
+		current.astro.moonset.includes("AM") || current.astro.moonset.includes("PM") ? true : false
+	const isHaveTimeMoonrise =
+		current.astro.moonrise.includes("AM") || current.astro.moonrise.includes("PM") ? true : false
 
 	return (
 		<div className="col-4 d-flex flex-column w-500">
@@ -37,12 +40,12 @@ const RightBlock = () => {
 				<div className="d-flex align-items-center flex-row justify-content-between p-2">
 					<img src="img/moonrise.png" alt="" />
 					<b className="align-self-center">Восход Луны</b>
-					<h5>{convertTime12To24(current.astro.moonrise)}</h5>
+					<h5>{isHaveTimeMoonrise ? convertTime12To24(current.astro.moonrise) : "Нет"}</h5>
 				</div>
 				<div className="d-flex align-items-center flex-row justify-content-between p-2">
 					<img src="img/moonset.png" alt="" />
 					<b className="align-self-center">Заход Луны</b>
-					<h5>{convertTime12To24(current.astro.moonset)}</h5>
+					<h5>{isHaveTimeMoonset ? convertTime12To24(current.astro.moonset) : "Нет"}</h5>
 				</div>
 				<hr className="my-4" />
 				<div className="d-flex align-items-center flex-row justify-content-between p-2">
@@ -62,6 +65,11 @@ const RightBlock = () => {
 			</div>
 		</div>
 	)
+}
+RightBlock.propTypes = {
+	city: PropTypes.string,
+	location: PropTypes.object,
+	forecast: PropTypes.object
 }
 
 export default RightBlock

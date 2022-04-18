@@ -2,9 +2,15 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link, useParams } from "react-router-dom"
 import { useCity } from "./../../../hooks/useCity"
+import dateFormat from "dateformat"
 
 const ForDay = ({ day }) => {
 	const time = ["3", "9", "15", "21"]
+	//console.log(day.date)
+	const today = Date.now()
+
+	const seeMoreDay = day.date === dateFormat(today, "yyyy-mm-dd") ? "today" : "tomorrow"
+
 	const hours = day["hour"]
 	const { city } = useCity()
 
@@ -57,7 +63,7 @@ const ForDay = ({ day }) => {
 				))}
 			</div>
 			<div className="d-flex justify-content-end mt-3">
-				<Link to={`/${city}/more`} className="align-self-end">
+				<Link to={`/${city}/more/${seeMoreDay}`} className="align-self-end">
 					Посмотреть подробнее
 				</Link>
 			</div>
