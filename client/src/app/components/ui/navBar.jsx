@@ -11,6 +11,7 @@ import history from "../../utils/history"
 import { AddressSuggestions } from "react-dadata"
 
 import { getByCityName } from "./../../store/weather"
+import localStorageService from "../../services/localStorage.service"
 
 const NavBar = () => {
 	const dispatch = useDispatch()
@@ -21,12 +22,12 @@ const NavBar = () => {
 			suggestionsRef.current.setInputValue("")
 		}
 		dispatch(getByCityName("Москва"))
-
 		history.push("/")
 	}
 
 	const handleChange = (cityName) => {
 		dispatch(getByCityName(cityName?.data?.city))
+		localStorageService.setCityToHistory(cityName?.data?.city)
 		history.push(cityName?.data?.city)
 	}
 

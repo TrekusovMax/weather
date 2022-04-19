@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
-import { getWeatherLoadingStatus, getWeather } from "../../../store/weather"
+import { getWeatherLoadingStatus } from "../../../store/weather"
 import City from "./city"
 import NavButton from "./navButton"
 import NavContent from "./navContent"

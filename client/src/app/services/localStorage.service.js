@@ -1,7 +1,33 @@
+import { isNull } from "lodash"
+
 const TOKEN_KEY = "jwt-token"
 const REFRESH_KEY = "jwt-refresh-token"
 const EXPIRES_KEY = "jwt-expires"
 const USERID_KEY = "user-local-id"
+const HISTORY = "history"
+
+export function setCityToHistory(city) {
+	const cities = new Array()
+	const citiesInHistory = getCitiesInHistory()
+
+	if (!isNull(citiesInHistory)) {
+		const citiesArray = citiesInHistory.split(",")
+
+		if (citiesArray.length > 6) {
+			citiesArray.shift()
+		}
+
+		cities.push(citiesArray)
+
+		if (!citiesArray.includes(city)) cities.push(city)
+	} else {
+		cities.push(city)
+	}
+	localStorage.setItem(HISTORY, cities)
+}
+export function getCitiesInHistory() {
+	return localStorage.getItem(HISTORY)
+}
 
 export function setTokens({ refreshToken, accessToken, userId, expiresIn = 3600 }) {
 	const expiresDate = new Date().getTime() + expiresIn * 1000
@@ -35,6 +61,8 @@ const localStorageService = {
 	getRefreshToken,
 	getTokenExpiresDate,
 	getUserId,
-	removeAuthData
+	removeAuthData,
+	setCityToHistory,
+	getCitiesInHistory
 }
 export default localStorageService
