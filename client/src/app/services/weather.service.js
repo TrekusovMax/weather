@@ -15,13 +15,14 @@ const weatherService = {
 		const { data } = await httpWeater.get(endpoint, {
 			params: {
 				key: config.api_key,
-				q: city === "" ? "Москва" : city,
+				q: city === "" || city === "favorites" ? "Москва" : city,
 				aqi: "no",
 				alerts: "no",
 				lang: "ru",
 				days: 3
 			}
 		})
+
 		return data
 	},
 	getCity: async (c) => {
@@ -35,6 +36,7 @@ const weatherService = {
 				days: 3
 			}
 		})
+
 		return data
 	}
 }

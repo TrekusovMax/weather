@@ -33,10 +33,12 @@ export const loadWeatherList = () => async (dispatch, getState) => {
 	const { lastFetch } = getState().weather
 	if (isOutdated(lastFetch)) {
 		dispatch(weatherRequested())
+
 		try {
 			const content = await weatherService.getAll()
 			dispatch(weatherReceived(content))
 		} catch (error) {
+			console.log(error.message)
 			toast.error(error)
 			dispatch(weatherRequestFailed(error.message))
 		}

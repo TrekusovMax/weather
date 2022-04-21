@@ -20,6 +20,7 @@ import { setCityToHistory } from "./../services/localStorage.service"
 
 const Main = () => {
 	const { city } = useCity()
+
 	const { more, day } = useParams()
 	const error = useSelector(getWeatherError())
 	const weatherList = useSelector(getWeather())

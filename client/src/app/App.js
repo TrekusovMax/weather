@@ -23,10 +23,10 @@ function App() {
 						<NavBar />
 						<Switch>
 							<ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
-							<Route path="/:city?/:more?/:day?" exact component={Main} />
-							<Route path="/favorites" exact component={Favorites} />
 							<Route path="/login/:type?" component={Login} />
 							<Route path="/logout" component={LogOut} />
+							<Route path="/favorites" exact component={Favorites} />
+							<Route path="/:city?/:more?/:day?" exact component={Main} />
 							<Redirect to="/" />
 						</Switch>
 					</div>
