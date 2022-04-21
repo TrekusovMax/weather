@@ -5,7 +5,8 @@ const schema = new Schema(
 		name: { type: String },
 		email: { type: String, required: true, unique: true },
 		password: { type: String },
-		favorites: [{ type: Schema.Types.ObjectId, ref: "Favorites" }]
+		//favorites: [{ type: Schema.Types.ObjectId, ref: "Favorites" }]
+		favorites: [{ type: String }]
 	},
 	{
 		timestamps: true

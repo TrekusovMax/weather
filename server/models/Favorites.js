@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose")
 const schema = Schema(
 	{
 		city: {
-			type: String,
+			type: Array,
 			required: true
 		}
 	},
