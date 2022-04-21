@@ -20,6 +20,9 @@ function NavProfile() {
 				<img src={currentUser.image} alt="" height="40" className="img-responsive rounded-circle" />
 			</div>
 			<div className={"w-100 dropdown-menu" + (isOpen ? " show" : "")}>
+				<Link to={`/favorites`} className="dropdown-item">
+					Избранное
+				</Link>
 				<Link to={`/users/${currentUser._id}/edit`} className="dropdown-item">
 					Профиль
 				</Link>

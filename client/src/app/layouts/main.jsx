@@ -2,14 +2,21 @@ import React from "react"
 import LeftBlock from "../components/ui/weather/leftBlock"
 import RightBlock from "./../components/ui/weather/rightBlock"
 
-import { useParams } from "react-router-dom"
+import { Link, Redirect, useParams } from "react-router-dom"
 import { useCity } from "./../hooks/useCity"
-import { useSelector } from "react-redux"
-import { getWeather, getWeatherError, getWeatherLoadingStatus } from "./../store/weather"
+import { useDispatch, useSelector } from "react-redux"
+import {
+	getByCityName,
+	getWeather,
+	getWeatherError,
+	getWeatherLoadingStatus
+} from "./../store/weather"
 import More from "../components/ui/weather/more"
 
-import { getCitiesInHistory } from "../services/localStorage.service"
+import localStorageService, { getCitiesInHistory } from "../services/localStorage.service"
 import { isNull } from "lodash"
+import history from "../utils/history"
+import { setCityToHistory } from "./../services/localStorage.service"
 
 const Main = () => {
 	const { city } = useCity()
@@ -17,7 +24,7 @@ const Main = () => {
 	const error = useSelector(getWeatherError())
 	const weatherList = useSelector(getWeather())
 	const isLoading = useSelector(getWeatherLoadingStatus())
-
+	const dispatch = useDispatch()
 	if (error) {
 		return <h1>Город не найден</h1>
 	}
@@ -27,7 +34,11 @@ const Main = () => {
 	const { location, forecast } = weatherList
 
 	const cities = !isNull(getCitiesInHistory()) ? getCitiesInHistory().split(",").reverse() : []
-
+	const handelClick = (cityName) => {
+		dispatch(getByCityName(cityName))
+		localStorageService.setCityToHistory(cityName)
+		history.push(`/${cityName}`)
+	}
 	return (
 		<div className="overflow-hidden my-5">
 			<div className="row gx-3">
@@ -55,11 +66,17 @@ const Main = () => {
 							<ul className="list-group list-group-horizontal list-group-flush">
 								{cities.map((c) => (
 									<li key={c}>
-										<a
+										<Link
+											to={`/${c}`}
+											onClick={() => handelClick(c)}
+											className={`text-center list-group-item  mx-2 ${city === c ? "active" : ""}`}>
+											{c}
+										</Link>
+										{/* 										<a
 											href={`/${c}`}
 											className={`text-center list-group-item  mx-2 ${city === c ? "active" : ""}`}>
 											{c}
-										</a>
+										</a> */}
 									</li>
 								))}
 							</ul>

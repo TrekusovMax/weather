@@ -11,12 +11,6 @@ const EditUserPage = () => {
 	const [data, setData] = useState()
 	const currentUser = useSelector(getCurrentUserData())
 	const dispatch = useDispatch()
-	/* const qualities = useSelector(getQualities())
-	const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
-	const qualitiesList = qualities.map((q) => ({
-		label: q.name,
-		value: q._id
-	})) */
 
 	const [errors, setErrors] = useState({})
 
@@ -24,40 +18,20 @@ const EditUserPage = () => {
 		e.preventDefault()
 		const isValid = validate()
 		if (!isValid) return
+
 		dispatch(
 			updateUser({
-				...data
-				//qualities: data.qualities.map((q) => q.value)
+				name: e.target.name.value,
+				email: e.target.email.value
 			})
 		)
 	}
-	/*function getQualitiesListByIds(qualitiesIds) {
-		const qualitiesArray = []
-		for (const qualId of qualitiesIds) {
-			for (const quality of qualities) {
-				if (quality._id === qualId) {
-					qualitiesArray.push(quality)
-					break
-				}
-			}
-		}
-		return qualitiesArray
-	}
-	 const transformData = (data) => {
-		const result = getQualitiesListByIds(data).map((qual) => ({
-			label: qual.name,
-			value: qual._id
-		}))
-		return result
-	} */
+
 	useEffect(() => {
-		if (/* !qualitiesLoading && */ currentUser && !data) {
-			setData({
-				...currentUser /* ,
-				qualities: transformData(currentUser.qualities) */
-			})
+		if (currentUser && !data) {
+			setData({ ...currentUser })
 		}
-	}, [/* qualitiesLoading, */ currentUser, data])
+	}, [currentUser, data])
 	useEffect(() => {
 		if (data && isLoading) {
 			setIsLoading(false)

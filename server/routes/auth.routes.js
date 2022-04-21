@@ -18,6 +18,7 @@ router.post("/signUp", [
 		try {
 			const errors = validationResult(req)
 			if (!errors.isEmpty()) {
+				console.log(e.message)
 				return res.status(400).json({
 					error: {
 						message: "INVALID_DATA",
@@ -32,6 +33,7 @@ router.post("/signUp", [
 			const exitingUser = await User.findOne({ email })
 
 			if (exitingUser) {
+				console.log(e.message)
 				return res.status(400).json({
 					error: {
 						message: "EMAIL_EXISTS",
@@ -74,6 +76,7 @@ router.post("/signInWithPassword", [
 		try {
 			const errors = validationResult(req)
 			if (!errors.isEmpty()) {
+				console.log(e.message)
 				return res.status(400).json({
 					error: {
 						message: "INVALID_DATA",
@@ -87,6 +90,7 @@ router.post("/signInWithPassword", [
 			const existingUser = await User.findOne({ email })
 
 			if (!existingUser) {
+				console.log(e.message)
 				return res.status(400).send({
 					error: {
 						message: "EMAIL_NOT_FOUND",
@@ -98,6 +102,7 @@ router.post("/signInWithPassword", [
 			const isPasswordEqual = await bcrypt.compare(password, existingUser.password)
 
 			if (!isPasswordEqual) {
+				console.log(e.message)
 				return res.status(400).send({
 					error: {
 						message: "INVALID_PASSWORD",

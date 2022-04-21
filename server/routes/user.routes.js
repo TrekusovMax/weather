@@ -8,8 +8,21 @@ router.patch("/:userId", auth, async (req, res) => {
 		const { userId } = req.params
 
 		if (userId === req.user._id) {
-			const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true })
-			res.send(updatedUser)
+			const user = await User.findById(userId, req.body, { new: true })
+			console.log(req.body)
+			const isFavorite = user.favorites?.some((city) => city.toString() === req.body?.favorites)
+			console.log(isFavorite)
+
+			if (isFavorite) {
+				const updatedUser = await User.findByIdAndUpdate(userId, { $pull: req.body }, { new: true })
+				res.send(updatedUser)
+			} else if (typeof isFavorite === "undefined") {
+				const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true })
+				res.send(updatedUser)
+			} else {
+				const updatedUser = await User.findByIdAndUpdate(userId, { $push: req.body }, { new: true })
+				res.send(updatedUser)
+			}
 		} else {
 			res.status(401).json({ message: "Unauthorized" })
 		}

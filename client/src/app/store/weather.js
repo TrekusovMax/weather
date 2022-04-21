@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { toast } from "react-toastify"
 import weatherService from "../services/weather.service"
 import isOutdated from "./../utils/isOutdated"
 
@@ -36,6 +37,7 @@ export const loadWeatherList = () => async (dispatch, getState) => {
 			const content = await weatherService.getAll()
 			dispatch(weatherReceived(content))
 		} catch (error) {
+			toast.error(error)
 			dispatch(weatherRequestFailed(error.message))
 		}
 	}
