@@ -1,5 +1,5 @@
 {
-	"apiEndpoint": "http://85.193.90.55:8080/api",
+	"apiEndpoint": "http://85.193.90.55/api",
 	"isFireBase": false,
 	"api_key": "e7b8f7ef83c1461f83562940221201",
 	"api_url": "https://api.weatherapi.com/v1/",
